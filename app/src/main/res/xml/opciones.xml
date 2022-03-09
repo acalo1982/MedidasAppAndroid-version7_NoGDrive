@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Project's Info">
+        <EditTextPreference
+            android:defaultValue="MicromagTest"
+            android:key="nameProyecto"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Project's Name" />
+        <EditTextPreference
+            android:defaultValue="7"
+            android:key="Narea"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Number/Names of Areas" />
+        <ListPreference
+            android:entries="@array/esquemas"
+            android:entryValues="@array/esquemavalues"
+            android:key="esquema"
+            android:title="Scheme" />
+        <!--android:summary="Descripción de la preferencia 3"-->
+        <!--android:dialogTitle="Indicar Pais"-->
+    </PreferenceCategory>
+
+
+    <PreferenceCategory android:title="Calibration">
+        <Preference
+            android:key="background"
+            android:title="Background" />
+        <Preference
+            android:key="reference"
+            android:title="Reference" />
+        <Preference
+            android:key="plex2mm"
+            android:title="3rd Standard (optional)" />
+        <!--android:textColor="#FF0000"--> Ver si cambia el color del texto del botón
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Measurement parameters">
+
+        <EditTextPreference
+            android:defaultValue="2"
+            android:key="freq1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Freq. ini (GHz)" />
+        <EditTextPreference
+            android:defaultValue="18"
+            android:key="freqEnd"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Freq. end (GHz)" />
+        <EditTextPreference
+            android:defaultValue="201"
+            android:key="npoint"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Num. points" />
+        <EditTextPreference
+            android:defaultValue="0.18"
+            android:key="filtro"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Filter length (m)" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Connection">
+
+        <EditTextPreference
+            android:defaultValue="10.1.18.121"
+            android:key="ip"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="IP" />
+        <EditTextPreference
+            android:defaultValue="5023"
+            android:key="puerto"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Port" />
+    </PreferenceCategory>
+</PreferenceScreen>

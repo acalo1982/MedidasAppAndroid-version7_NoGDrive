@@ -1,0 +1,50 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/criterio"
+        android:icon="@android:drawable/screen_background_light_transparent"
+        android:orderInCategory="100"
+        android:title="EvaluacionMedida"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/cmbToolbar"
+        android:title="Area"
+        app:actionViewClass="android.widget.Spinner"
+        app:showAsAction="always" />
+    <!--android:background="@color/background_material_light"-->
+    <!--android:textColor="@color/primary_text_default_material_light"-->
+
+    <item
+        android:id="@+id/action_nuevo"
+        android:orderInCategory="100"
+        android:title="0"
+        app:showAsAction="always|withText" />
+    <!--android:icon="@drawable/ic_nuevo"-->
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/bateria"
+        android:icon="@drawable/battery_charge_background_00"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_buscar"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:orderInCategory="100"
+        android:title="@string/action_buscar"
+        app:showAsAction="always" />
+
+
+</menu>

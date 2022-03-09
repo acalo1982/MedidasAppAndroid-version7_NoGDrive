@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Measurements</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_buscar">Search</string>
+    <string name="action_nuevo">New</string>
+    <string name="prueba">Test</string>
+    <string name="checkbox">Checkbox</string>
+    <string-array name="esquemas">
+        <item>X-Band</item>
+    </string-array>
+    <string-array name="esquemavalues">
+        <item>X.Band-Metal</item>
+    </string-array>
+    <string name="title_activity_login_screen">LoginScreen</string>
+</resources>
