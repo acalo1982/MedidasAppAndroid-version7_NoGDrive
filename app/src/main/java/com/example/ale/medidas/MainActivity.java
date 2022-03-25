@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 
+/*
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -29,6 +30,8 @@ import com.google.android.gms.drive.Drive;
 import com.google.android.gms.drive.DriveContents;
 import com.google.android.gms.drive.DriveFolder;
 import com.google.android.gms.drive.MetadataChangeSet;
+*/
+
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.*;
 
@@ -57,8 +60,11 @@ import fastandroid.neoncore.collection.FaCollection;
 
 import static java.security.AccessController.getContext;
 
+/*
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+*/
 
+public class MainActivity extends AppCompatActivity  {
     private TCPClient mTcpClient; //objeto que recivirá y enviará msg al servidor!
     private TCPClientv2 mTcpClientv2;
     private int conectado = 0;//monitoriza el estado de conexión al VNA
@@ -85,9 +91,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private double[] freq;
     private int criterio_ico = 10;//se pone el icono de criterio en modo transparente
     private double fo = 10;//nos centramos en 10GHz para probar los criterios con la plancha CAL1
+    /*
     private GoogleApiClient apiClient;//cliente para manejar la conexión con Google Drive
     //private String MedidasAppFolderID = "DriveId:0BxBzpgvBYNJ1ZTJjeDlyNlVWUGs";//FolderID del directorio "MedidaApp" que hay en la cuenta "micromag@micromag.es"
     private String MedidasAppFolderID = "DriveId:CAASABjkOyDMyuu7iFcoAQ==";//FolderID del directorio "MedidaApp" que hay en la cuenta "micromag@micromag.es"
+    */
     private ProgressDialog progress;//Barra de progreso para la conexión inicial al analizador
     private String bateria_vna = "-1";
 
@@ -238,25 +246,31 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             freq[i] = f1 + df * i;
             //Log.e("MainAct.OnCreate","alej: freq["+i+"] = "+freq[i]);
         }
-
+/*
         //Cliente que maneja la conexión a Google Drive (asumimos que habrá una carpeta llamada "MedidasAPP")
         apiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Drive.API).addScope(Drive.SCOPE_FILE).build();
+    */
     }
+
 
 
     @Override
     public void onStart() {
         super.onStart();
+        /*
         apiClient.connect();
-
+*/
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        /*
         apiClient.disconnect();
+        */
     }
 
+    /*
     //GDrive: (Debug) Test Crear Folder en Directorio Raiz
     public void GDFolderRoot() {
         DriveFolder folder = Drive.DriveApi.getRootFolder(apiClient);
@@ -281,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         Log.e("GDrive API", "alej: OnConnectionFailed: " + connectionResult);
     }
 
-
+*/
     //Este método es llamado cuando damos al botón HW atrás, desde la actividad de configuración (objetivo: actualizar el spinner con las áreas disponibles de la Actionbar!)
     @Override
     protected void onResume() {
@@ -591,11 +605,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             } else {
                 Toast.makeText(getApplicationContext(), "Almacenamiento Externo No Disponible", Toast.LENGTH_SHORT).show();
             }
-
+/*
             //Copiar Archivo a GDrive
             //GDFolderRoot();//Testeo: Crea una carpeta en el Raiz y obtiene el FolderID
             String[] datos = new String[]{src, "Copiar", MedidasAppFolderID, fileID};//filename del XML a copiar!
             new createGDriveFileTask().execute(datos);//debug en Modo Online
+            */
         }
         if ((Nmed == 0) && (NumAreaSelec > -1)) {
             // Borrar este archivo de preferencias q contiene las medidas del área seleccionada, ya q se han borrado todas!
@@ -727,7 +742,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 break;
         }
 
-        //Emite sonido acorde al tipo de medida realizada
+
+        /*//Emite sonido acorde al tipo de medida realizada
         if (Rsound != 0) {
             MediaPlayer player = new MediaPlayer();
             String RESOURCE_PATH = ContentResolver.SCHEME_ANDROID_RESOURCE + "://";
@@ -740,7 +756,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 e.printStackTrace();
             }
         }
-
+*/
 
         //Notificacion en la barra de tareas
 //        int notificationID = 1;
@@ -957,6 +973,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 return super.onOptionsItemSelected(item);
         }
     }
+/*
 
     //Guarda FileID de GDrive en el archivos XML de area guardado previamente
     public void writeDriveFileID2Preferences(String newFileID, String src_file) {
@@ -970,6 +987,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         editor.putString("GoogleDriveFolderID", MedidasAppFolderID);//ID del directorio donde se ha creado el fichero
         editor.commit();
     }
+*/
 
     //Cliente v1: Se abre/cierra un socket en el envío de cada comando (si el comando es de request, se espera a la respuesta del VNA)
     public class connectTask extends AsyncTask<String, String, TCPClient> {
@@ -1028,6 +1046,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     }
 
+/*
 
     //GDrive: Maneja la conexión a Google Drive para guardar las medidas, debe hacerse en otro hilo (thread)
     public class createGDriveFileTask extends AsyncTask<String, String, GDriveClient> {
@@ -1075,6 +1094,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         }
     }
+*/
 
 
 //    //Cliente v2: Comparte un socket para enviar varios comandos y escuchar las respuestas enviadas por el servidor
