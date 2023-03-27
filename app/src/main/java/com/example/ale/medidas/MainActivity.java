@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -380,7 +381,7 @@ public class MainActivity extends AppCompatActivity  {
         float fstop = 18;
         double dR = 0.2;//así se declara un número como float (32 bits)
         int N = 201;
-        int Nfft = (int) Math.pow(2, 10);//long del vector S11 (201 puntos) + zero padding (ceros hasta los 1024 puntos: 10 bits)
+        int Nfft = (int) Math.pow(2, 10);//1024 = 2^10 -- long del vector S11 (201 puntos) + zero padding (ceros hasta los 1024 puntos: 10 bits)
         if (pref.getString("freq1", "") != null) {
             fini = Float.parseFloat(pref.getString("freq1", ""));
             fstop = Float.parseFloat(pref.getString("freqEnd", ""));
@@ -636,7 +637,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     //Actualiza los nombres de las areas o el num de areas a medir
-    public void actulizaSpinnerArea(Menu menu) {
+    public void actulizaSpinnerArea(@NonNull Menu menu) {
         //Spinner: Asociamos el Adaptador con el contenido
         MenuItem item = menu.findItem(R.id.cmbToolbar);
         Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);

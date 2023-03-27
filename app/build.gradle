@@ -20,7 +20,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs\\commons-math4-core-4.0-beta1.jar')
+    compile files('libs\\commons-math4-legacy-4.0-beta1.jar')
+    compile files('libs\\commons-math4-legacy-core-4.0-beta1.jar')
+    compile files('libs\\commons-math4-legacy-exception-4.0-beta1.jar')
+    compile files('libs\\commons-math4-neuralnet-4.0-beta1.jar')
+    compile files('libs\\commons-math4-transform-4.0-beta1.jar')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
