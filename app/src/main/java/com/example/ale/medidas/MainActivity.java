@@ -1,5 +1,7 @@
 package com.example.ale.medidas;
 
+import static com.example.ale.medidas.MathV.float2double;
+
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -60,6 +62,8 @@ import java.util.Arrays;
 import fastandroid.neoncore.collection.FaCollection;
 
 import static java.security.AccessController.getContext;
+
+import org.apache.commons.math4.transform.FastFourierTransform;
 
 /*
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -439,20 +443,54 @@ public class MainActivity extends AppCompatActivity  {
         float[] Sm_Im = Arrays.copyOf(S11m.v2(), Nfft);
 
 
-        //Realizamos la IFFT
+        // ----- IFFT: Se hace con la librería "neoncore" --------
         float[] Sb_Re_t = Sb_Re;//copia de los valores en freq y tras la fft será rellenado cn los valores en el tiempo
         float[] Sb_Im_t = Sb_Im;
         float[] Sr_Re_t = Sr_Re;
         float[] Sr_Im_t = Sr_Im;
         float[] Sm_Re_t = Sm_Re;
         float[] Sm_Im_t = Sm_Im;
+
         FaCollection.ifft_float32(Sb_Re_t, Sb_Im_t);//esta función modifica el contenido de las variables "Sr_t" y "Si_t" (como si fueran punteros!)
         FaCollection.ifft_float32(Sr_Re_t, Sr_Im_t);
         FaCollection.ifft_float32(Sm_Re_t, Sm_Im_t);
+
         MathDatos Sb_t = new MathDatos(Sb_Re_t, Sb_Im_t);
         MathDatos Sr_t = new MathDatos(Sr_Re_t, Sr_Im_t);
         MathDatos Sm_t = new MathDatos(Sm_Re_t, Sm_Im_t);
         MathDatos[] Sparam = new MathDatos[]{Sb_t, Sr_t, Sm_t};//array de objetos MathDatos (CaL y Medida)
+
+        //---------------------------------------------------------
+
+        //-----IFFT: Se hace con la librería Apache Commons Math v4---
+        double[][] Sb_tt = new double[2][];
+        double[][] Sr_tt = new double[2][];
+        double[][] Sm_tt = new double[2][];
+        Sb_tt[0] = float2double(Sb_Re);
+        Sb_tt[1] = float2double(Sb_Im);
+        Sr_tt[0] = float2double(Sr_Re);
+        Sr_tt[1] = float2double(Sr_Im);
+        Sm_tt[0] = float2double(Sm_Re);
+        Sm_tt[1] = float2double(Sm_Im);
+        FastFourierTransform ifft = new FastFourierTransform(FastFourierTransform.Norm.STD, true);
+        ifft.transformInPlace(Sb_tt);
+        ifft.transformInPlace(Sr_tt);
+        ifft.transformInPlace(Sm_tt);
+
+        float[][] Sb_t2=MathV.double2float(Sb_tt);// se convierte a un array-2D de float en vez de double
+        MathDatos Sb_tf = new MathDatos(Sb_t2[0],Sb_t2[1]);
+        MathDatos Sr_tf = new MathDatos(MathV.double2float(Sr_tt)[0], MathV.double2float(Sr_tt)[1]);
+        MathDatos Sm_tf = new MathDatos(MathV.double2float(Sm_tt)[0], MathV.double2float(Sm_tt)[1]);
+        MathDatos[] Sparam2 = new MathDatos[]{Sb_tf, Sr_tf, Sm_tf};//array de objetos MathDatos (CaL y Medida)
+
+        //Filtrado y CaL
+        MathDatos[] Scal_tt = MathV.filtrar(Sparam2, dR, dx);
+
+        //Realizamos "IFFT/Nfft"
+        MathDatos[] SS2 = MathV.calBackRef(Scal_tt, N);
+        Rcoef = SS2[0];//S11 de la medida calibrado!
+        //------------------------------------------------------------
+
 
         //Pintamos la IFFT
         //graph.removeAllSeries();//borramos las series de los ejes

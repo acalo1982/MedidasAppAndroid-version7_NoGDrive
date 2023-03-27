@@ -10,6 +10,7 @@ import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.math4.transform.FastFourierTransform;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -424,6 +425,28 @@ public final class MathV {
         MathDatos Sr2 = new MathDatos(Sr2Re, Sr2Im);
         MathDatos Sm2 = new MathDatos(Sm2Re, Sm2Im);
 
+        //-----FFT: Se hace con la librería Apache Commons Math v4---
+//        double[][] Sb_tt = new double[2][];
+//        double[][] Sr_tt = new double[2][];
+//        double[][] Sm_tt = new double[2][];
+//        Sb_tt[0] = float2double(Sb2Re);
+//        Sb_tt[1] = float2double(Sb2Im);
+//        Sr_tt[0] = float2double(Sr2Re);
+//        Sr_tt[1] = float2double(Sr2Im);
+//        Sm_tt[0] = float2double(Sm2Re);
+//        Sm_tt[1] = float2double(Sm2Im);
+//
+//        FastFourierTransform fft = new FastFourierTransform(FastFourierTransform.Norm.STD, false);
+//        fft.transformInPlace(Sb_tt);
+//        fft.transformInPlace(Sr_tt);
+//        fft.transformInPlace(Sm_tt);
+//
+//        //Estandares de CaL en la freq (ya filtrados en espacio): reusamos los objetos, para instanciar más
+//        MathDatos Sb2 = new MathDatos(MathV.double2float(Sb_tt)[0], MathV.double2float(Sb_tt)[1]);//freq
+//        MathDatos Sr2 = new MathDatos(MathV.double2float(Sr_tt)[0], MathV.double2float(Sr_tt)[1]);
+//        MathDatos Sm2 = new MathDatos(MathV.double2float(Sm_tt)[0], MathV.double2float(Sm_tt)[1]);
+        //-----------------------
+
         //CaL: calibración sencilla: R=Rpec*(Sm-Sb)/(Sr-Sb)=-1*(Sm-Sb)/(Sr-Sb)!!
         MathDatos s1 = sum_wV(Sm2, Sb2, 1, -1);
         MathDatos s2 = sum_wV(Sr2, Sb2, 1, -1);
@@ -684,6 +707,40 @@ public final class MathV {
             }
         }
         return cnt;
+    }
+
+    //Convierte array de Float a array de Double
+    public static double[] float2double(float[] dat){
+        double [] datD = new double[dat.length];
+        for (int i = 0 ; i < dat.length; i++)
+        {
+            Float float_obj1= new Float(dat[i]); //crea objeto Float
+            double double_obj= float_obj1.doubleValue(); //invoca al método de esta claes que lo convierte a double
+            datD[i]=double_obj; //rellena un vector de doubles
+        }
+        return datD;
+    }
+
+    //Convierte array de Float a array de Double
+    public static float[] double2float(double[] dat){
+        float [] datF = new float[dat.length];
+        for (int i = 0 ; i < dat.length; i++)
+        {
+            Double float_obj1= new Double(dat[i]); //crea objeto Double
+            float float_obj= float_obj1.floatValue(); //invoca al método de esta claes que lo convierte a Float
+            datF[i]=float_obj; //rellena un vector de doubles
+        }
+        return datF;
+    }
+
+    //Convierte doble array de Float a array doble de Double
+    public static float[][] double2float(double[][] dat){
+        //
+        float[][] datF = new float[dat.length][];
+        for (int i=0; i<dat.length; i++) {
+            datF[i] = double2float(dat[i]);
+        }
+        return datF;
     }
 }
 
