@@ -430,50 +430,50 @@ public final class MathV {
         MathDatos Sm2 = new MathDatos(Sm2Re, Sm2Im);
         //------------------------------------------------------------
 
-//        //-----FFT: Se hace con la librería Apache Commons Math v4---
-//        //Valores en el espacio del Back, Ref y Med filtrados: multiplicados por la ventana
-//        double[][] Sb_tt = new double[2][];
-//        double[][] Sr_tt = new double[2][];
-//        double[][] Sm_tt = new double[2][];
-//        Sb_tt[0] = float2double(Sb_t.v1());
-//        Sb_tt[1] = float2double(Sb_t.v2());
-//        Sr_tt[0] = float2double(Sr_t.v1());
-//        Sr_tt[1] = float2double(Sr_t.v2());
-//        Sm_tt[0] = float2double(Sm_t.v1());
-//        Sm_tt[1] = float2double(Sm_t.v2());
-//        //Los valores filtrados son pasados al dominio de la freq (FFT): el resultado se almacena en la misma variable de entrada: paso de param. por referencia
-//        FastFourierTransform fft = new FastFourierTransform(FastFourierTransform.Norm.STD, false);
-//        fft.transformInPlace(Sb_tt);
-//        fft.transformInPlace(Sr_tt);
-//        fft.transformInPlace(Sm_tt);
-//
-//        //Se pasa del formato de Matriz de 2 vectores Double con [Re Im] a MathDatos que contiene Re Im como vectores Float
-//        MathDatos Sb3 = new MathDatos(MathV.double2float(Sb_tt)[0], MathV.double2float(Sb_tt)[1]);
-//        MathDatos Sr3 = new MathDatos(MathV.double2float(Sr_tt)[0], MathV.double2float(Sr_tt)[1]);
-//        MathDatos Sm3 = new MathDatos(MathV.double2float(Sm_tt)[0], MathV.double2float(Sm_tt)[1]);
-//
-////        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-////        builder.setMessage("¿Estás seguro?");
-////        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-////            @Override
-////            public void onClick(DialogInterface dialogInterface, int i) {
-////                // Código que se ejecutará al hacer clic en el botón "Sí"
-////            }
-////        });
-////        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-////            @Override
-////            public void onClick(DialogInterface dialogInterface, int i) {
-////                // Código que se ejecutará al hacer clic en el botón "No"
-////            }
-////        });
-////        AlertDialog dialog = builder.create();
-////        dialog.show();
-//
-//
-//        //Se pisan los valores de la anterior transformada
-//        Sb2 = Sb3;
-//        Sr2 = Sr3;
-//        Sm2 = Sm3;
+        //-----FFT: Se hace con la librería Apache Commons Math v4---
+        //Valores en el espacio del Back, Ref y Med filtrados: multiplicados por la ventana
+        double[][] Sb_tt = new double[2][];
+        double[][] Sr_tt = new double[2][];
+        double[][] Sm_tt = new double[2][];
+        Sb_tt[0] = float2double(Sb_t.v1());
+        Sb_tt[1] = float2double(Sb_t.v2());
+        Sr_tt[0] = float2double(Sr_t.v1());
+        Sr_tt[1] = float2double(Sr_t.v2());
+        Sm_tt[0] = float2double(Sm_t.v1());
+        Sm_tt[1] = float2double(Sm_t.v2());
+        //Los valores filtrados son pasados al dominio de la freq (FFT): el resultado se almacena en la misma variable de entrada: paso de param. por referencia
+        FastFourierTransform fft = new FastFourierTransform(FastFourierTransform.Norm.STD, false);
+        fft.transformInPlace(Sb_tt);
+        fft.transformInPlace(Sr_tt);
+        fft.transformInPlace(Sm_tt);
+
+        //Se pasa del formato de Matriz de 2 vectores Double con [Re Im] a MathDatos que contiene Re Im como vectores Float
+        MathDatos Sb3 = new MathDatos(MathV.double2float(Sb_tt)[0], MathV.double2float(Sb_tt)[1]);
+        MathDatos Sr3 = new MathDatos(MathV.double2float(Sr_tt)[0], MathV.double2float(Sr_tt)[1]);
+        MathDatos Sm3 = new MathDatos(MathV.double2float(Sm_tt)[0], MathV.double2float(Sm_tt)[1]);
+
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setMessage("¿Estás seguro?");
+//        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                // Código que se ejecutará al hacer clic en el botón "Sí"
+//            }
+//        });
+//        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                // Código que se ejecutará al hacer clic en el botón "No"
+//            }
+//        });
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+
+
+        //Se pisan los valores de la anterior transformada
+        Sb2 = Sb3;
+        Sr2 = Sr3;
+        Sm2 = Sm3;
         //------------------------------------------------------------
 
 
