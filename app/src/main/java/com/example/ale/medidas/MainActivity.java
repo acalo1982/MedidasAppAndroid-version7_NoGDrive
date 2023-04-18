@@ -476,32 +476,32 @@ public class MainActivity extends AppCompatActivity  {
         //---------------------------------------------------------
 
         //-----IFFT: Se hace con la librería Apache Commons Math v4---
-        double[][] Sb_tt = new double[2][];
-        double[][] Sr_tt = new double[2][];
-        double[][] Sm_tt = new double[2][];
-        Sb_tt[0] = float2double(Sb_Re);
-        Sb_tt[1] = float2double(Sb_Im);
-        Sr_tt[0] = float2double(Sr_Re);
-        Sr_tt[1] = float2double(Sr_Im);
-        Sm_tt[0] = float2double(Sm_Re);
-        Sm_tt[1] = float2double(Sm_Im);
-        FastFourierTransform ifft = new FastFourierTransform(FastFourierTransform.Norm.STD, true);
-        ifft.transformInPlace(Sb_tt);
-        ifft.transformInPlace(Sr_tt);
-        ifft.transformInPlace(Sm_tt);
-
-        //float[][] Sb_t2=MathV.double2float(Sb_tt);// se convierte a un array-2D de float en vez de double
-        MathDatos Sb_tf = new MathDatos(MathV.double2float(Sb_tt)[0], MathV.double2float(Sb_tt)[1]);
-        MathDatos Sr_tf = new MathDatos(MathV.double2float(Sr_tt)[0], MathV.double2float(Sr_tt)[1]);
-        MathDatos Sm_tf = new MathDatos(MathV.double2float(Sm_tt)[0], MathV.double2float(Sm_tt)[1]);
-        MathDatos[] Sparam2 = new MathDatos[]{Sb_tf, Sr_tf, Sm_tf};//array de objetos MathDatos (CaL y Medida)
-
-        //Filtrado y CaL
-        MathDatos[] Scal_tt = MathV.filtrar(Sparam2, dR, dx);
-
-        //Realizamos "FFT/Nfft"
-        MathDatos[] SS2 = MathV.calBackRef(Scal_tt, N);
-        Rcoef = SS2[0];//S11 de la medida calibrado!
+//        double[][] Sb_tt = new double[2][];
+//        double[][] Sr_tt = new double[2][];
+//        double[][] Sm_tt = new double[2][];
+//        Sb_tt[0] = float2double(Sb_Re);
+//        Sb_tt[1] = float2double(Sb_Im);
+//        Sr_tt[0] = float2double(Sr_Re);
+//        Sr_tt[1] = float2double(Sr_Im);
+//        Sm_tt[0] = float2double(Sm_Re);
+//        Sm_tt[1] = float2double(Sm_Im);
+//        FastFourierTransform ifft = new FastFourierTransform(FastFourierTransform.Norm.STD, true);
+//        ifft.transformInPlace(Sb_tt);
+//        ifft.transformInPlace(Sr_tt);
+//        ifft.transformInPlace(Sm_tt);
+//
+//        //float[][] Sb_t2=MathV.double2float(Sb_tt);// se convierte a un array-2D de float en vez de double
+//        MathDatos Sb_tf = new MathDatos(MathV.double2float(Sb_tt)[0], MathV.double2float(Sb_tt)[1]);
+//        MathDatos Sr_tf = new MathDatos(MathV.double2float(Sr_tt)[0], MathV.double2float(Sr_tt)[1]);
+//        MathDatos Sm_tf = new MathDatos(MathV.double2float(Sm_tt)[0], MathV.double2float(Sm_tt)[1]);
+//        MathDatos[] Sparam2 = new MathDatos[]{Sb_tf, Sr_tf, Sm_tf};//array de objetos MathDatos (CaL y Medida)
+//
+//        //Filtrado y CaL
+//        MathDatos[] Scal_tt = MathV.filtrar(Sparam2, dR, dx);
+//
+//        //Realizamos "FFT/Nfft"
+//        MathDatos[] SS2 = MathV.calBackRef(Scal_tt, N);
+//        Rcoef = SS2[0];//S11 de la medida calibrado!
         //------------------------------------------------------------
 
 
