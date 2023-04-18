@@ -1,5 +1,7 @@
 package com.example.ale.medidas;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.util.Log;
 
@@ -391,7 +393,7 @@ public final class MathV {
         Scal[1] = Sr_t;
         Scal[2] = Sm_t;
 
-        //Test: filtroç
+        //Test: filtro
         //float[] cero=new float[N];
         //Sm_t2 = new MathDatos(filt, cero);
 
@@ -407,7 +409,7 @@ public final class MathV {
         MathDatos Sr_t = Scal_t[1];
         MathDatos Sm_t = Scal_t[2];
 
-        //FFT
+        //----- FFT: con la librería "neoncore" ------------------
         float[] Sb2Re = Sb_t.v1();
         float[] Sb2Im = Sb_t.v2();
         float[] Sr2Re = Sr_t.v1();
@@ -416,14 +418,65 @@ public final class MathV {
         float[] Sm2Im = Sm_t.v2();
         int N = Sm2Im.length;
         double k = (1 / (double) N);//factor q necesita corregirse al hacer "y=FFT(IFFT(y))*1/N"
+
         FaCollection.fft_float32(Sb2Re, Sb2Im);
         FaCollection.fft_float32(Sr2Re, Sr2Im);
         FaCollection.fft_float32(Sm2Re, Sm2Im);
+
 
         //Estandares de CaL en la freq (ya filtrados en espacio): reusamos los objetos, para instanciar más
         MathDatos Sb2 = new MathDatos(Sb2Re, Sb2Im);//freq
         MathDatos Sr2 = new MathDatos(Sr2Re, Sr2Im);
         MathDatos Sm2 = new MathDatos(Sm2Re, Sm2Im);
+        //------------------------------------------------------------
+
+        //-----FFT: Se hace con la librería Apache Commons Math v4---
+        //Valores en el espacio del Back, Ref y Med filtrados: multiplicados por la ventana
+        double[][] Sb_tt = new double[2][];
+        double[][] Sr_tt = new double[2][];
+        double[][] Sm_tt = new double[2][];
+        Sb_tt[0] = float2double(Sb_t.v1());
+        Sb_tt[1] = float2double(Sb_t.v2());
+        Sr_tt[0] = float2double(Sr_t.v1());
+        Sr_tt[1] = float2double(Sr_t.v2());
+        Sm_tt[0] = float2double(Sm_t.v1());
+        Sm_tt[1] = float2double(Sm_t.v2());
+        //Los valores filtrados son pasados al dominio de la freq (FFT): el resultado se almacena en la misma variable de entrada: paso de param. por referencia
+        FastFourierTransform fft = new FastFourierTransform(FastFourierTransform.Norm.STD, false);
+        fft.transformInPlace(Sb_tt);
+        fft.transformInPlace(Sr_tt);
+        fft.transformInPlace(Sm_tt);
+
+        //Se pasa del formato de Matriz de 2 vectores Double con [Re Im] a MathDatos que contiene Re Im como vectores Float
+        MathDatos Sb3 = new MathDatos(MathV.double2float(Sb_tt)[0], MathV.double2float(Sb_tt)[1]);
+        MathDatos Sr3 = new MathDatos(MathV.double2float(Sr_tt)[0], MathV.double2float(Sr_tt)[1]);
+        MathDatos Sm3 = new MathDatos(MathV.double2float(Sm_tt)[0], MathV.double2float(Sm_tt)[1]);
+
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setMessage("¿Estás seguro?");
+//        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                // Código que se ejecutará al hacer clic en el botón "Sí"
+//            }
+//        });
+//        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                // Código que se ejecutará al hacer clic en el botón "No"
+//            }
+//        });
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+
+
+        //Se pisan los valores de la anterior transformada
+        Sb2 = Sb3;
+        Sr2 = Sr3;
+        Sm2 = Sm3;
+        //------------------------------------------------------------
+
+
 
         //-----FFT: Se hace con la librería Apache Commons Math v4---
 //        double[][] Sb_tt = new double[2][];
@@ -710,34 +763,32 @@ public final class MathV {
     }
 
     //Convierte array de Float a array de Double
-    public static double[] float2double(float[] dat){
-        double [] datD = new double[dat.length];
-        for (int i = 0 ; i < dat.length; i++)
-        {
-            Float float_obj1= new Float(dat[i]); //crea objeto Float
-            double double_obj= float_obj1.doubleValue(); //invoca al método de esta claes que lo convierte a double
-            datD[i]=double_obj; //rellena un vector de doubles
+    public static double[] float2double(float[] dat) {
+        double[] datD = new double[dat.length];
+        for (int i = 0; i < dat.length; i++) {
+            Float float_obj1 = new Float(dat[i]); //crea objeto Float
+            double double_obj = float_obj1.doubleValue(); //invoca al método de esta claes que lo convierte a double
+            datD[i] = double_obj; //rellena un vector de doubles
         }
         return datD;
     }
 
-    //Convierte array de Float a array de Double
-    public static float[] double2float(double[] dat){
-        float [] datF = new float[dat.length];
-        for (int i = 0 ; i < dat.length; i++)
-        {
-            Double float_obj1= new Double(dat[i]); //crea objeto Double
-            float float_obj= float_obj1.floatValue(); //invoca al método de esta claes que lo convierte a Float
-            datF[i]=float_obj; //rellena un vector de doubles
+    //Convierte array de Double a array de Float
+    public static float[] double2float(double[] dat) {
+        float[] datF = new float[dat.length];
+        for (int i = 0; i < dat.length; i++) {
+            Double float_obj1 = new Double(dat[i]); //crea objeto Double
+            float float_obj = float_obj1.floatValue(); //invoca al método de esta claes que lo convierte a Float
+            datF[i] = float_obj; //rellena un vector de doubles
         }
         return datF;
     }
 
-    //Convierte doble array de Float a array doble de Double
-    public static float[][] double2float(double[][] dat){
+    //Convierte doble array de Doube a array doble de Float
+    public static float[][] double2float(double[][] dat) {
         //
         float[][] datF = new float[dat.length][];
-        for (int i=0; i<dat.length; i++) {
+        for (int i = 0; i < dat.length; i++) {
             datF[i] = double2float(dat[i]);
         }
         return datF;
