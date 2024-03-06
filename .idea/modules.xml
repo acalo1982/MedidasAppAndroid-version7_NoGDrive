@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MedidasAppAndroid-version5_APIGoogleDrive.iml" filepath="$PROJECT_DIR$/MedidasAppAndroid-version5_APIGoogleDrive.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MedidasAppAndroid-version5_APIGoogleDrive.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MedidasAppAndroid-version5_APIGoogleDrive.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/commons-lang3-3.5/MedidasAppAndroid-version5_APIGoogleDrive.commons-lang3-3.5.iml" filepath="$PROJECT_DIR$/.idea/modules/commons-lang3-3.5/MedidasAppAndroid-version5_APIGoogleDrive.commons-lang3-3.5.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/neoncore-release/MedidasAppAndroid-version5_APIGoogleDrive.neoncore-release.iml" filepath="$PROJECT_DIR$/.idea/modules/neoncore-release/MedidasAppAndroid-version5_APIGoogleDrive.neoncore-release.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MedidasAppAndroid-version7_NoGDrive.iml" filepath="$PROJECT_DIR$/.idea/MedidasAppAndroid-version7_NoGDrive.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MedidasAppAndroid-version7_NoGDrive.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MedidasAppAndroid-version7_NoGDrive.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/commons-lang3-3.5/MedidasAppAndroid-version7_NoGDrive.commons-lang3-3.5.iml" filepath="$PROJECT_DIR$/.idea/modules/commons-lang3-3.5/MedidasAppAndroid-version7_NoGDrive.commons-lang3-3.5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/neoncore-release/MedidasAppAndroid-version7_NoGDrive.neoncore-release.iml" filepath="$PROJECT_DIR$/.idea/modules/neoncore-release/MedidasAppAndroid-version7_NoGDrive.neoncore-release.iml" />
     </modules>
   </component>
 </project>

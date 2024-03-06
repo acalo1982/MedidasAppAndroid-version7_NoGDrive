@@ -1,26 +1,42 @@
 package com.example.ale.medidas;
 
-import android.app.NotificationManager;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import fastandroid.neoncore.collection.FaCollection;
 
 /*
 import com.google.android.gms.common.ConnectionResult;
@@ -31,34 +47,6 @@ import com.google.android.gms.drive.DriveContents;
 import com.google.android.gms.drive.DriveFolder;
 import com.google.android.gms.drive.MetadataChangeSet;
 */
-
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.*;
-
-import android.content.pm.ActivityInfo;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import fastandroid.neoncore.collection.FaCollection;
-
-import static java.security.AccessController.getContext;
 
 /*
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {

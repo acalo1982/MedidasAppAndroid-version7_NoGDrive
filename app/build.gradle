@@ -19,13 +19,22 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
+    //implementation files('C:\\Users\\Usuario\\StudioProjects\\MedidasAppAndroid-version7_NoGDrive\\app\\libs\\neoncore-release.aar')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //compile files('libs/neoncore-release.aar')
+    compile (name:'neoncore-release', ext:'aar')
     compile files('libs/GraphView-4.2.1.jar')
-    compile project(':neoncore-release')
+    //compile project(':neoncore-release')
     compile project(':commons-lang3-3.5')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
