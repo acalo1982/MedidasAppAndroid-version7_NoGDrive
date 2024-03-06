@@ -20,6 +20,12 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     compile files('libs\\commons-math4-core-4.0-beta1.jar')
     compile files('libs\\commons-math4-legacy-4.0-beta1.jar')
@@ -31,7 +37,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile files('libs/GraphView-4.2.1.jar')
-    compile project(':neoncore-release')
+    //compile project(':neoncore-release')
+    compile (name:'neoncore-release', ext:'aar')
     compile project(':commons-lang3-3.5')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
